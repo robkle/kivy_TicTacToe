@@ -4,7 +4,6 @@ from kivy.lang import Builder
 from kivy.uix.boxlayout import BoxLayout
 from kivy.config import Config
 from math import inf
-from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.properties import NumericProperty, StringProperty, ObjectProperty
 
 Builder.load_file('TttApp.kv')
@@ -13,6 +12,14 @@ class TttLayout(BoxLayout):
 	tic = NumericProperty(1)
 	symbol = StringProperty('')
 	tictactoe = ObjectProperty([inf for i in range(9)])
+
+	def click(self, bt):
+		if self.tictactoe[bt] == inf and self.win() == False:
+			self.symbolCell();
+			self.ids[f'bt{bt}'].text = self.symbol
+			self.tictactoe[bt] = self.tic; 
+			self.selectCell(); 
+			self.win_display();
 	
 	def selectCell(self):
 		if self.tic:
@@ -35,9 +42,7 @@ class TttLayout(BoxLayout):
 		col3 = self.tictactoe[2] + self.tictactoe[5] + self.tictactoe[8]
 		dgn1 = self.tictactoe[0] + self.tictactoe[4] + self.tictactoe[8]
 		dgn2 = self.tictactoe[2] + self.tictactoe[4] + self.tictactoe[6]
-		
 		winsum = [row1, row2, row3, col1, col2, col3, dgn1, dgn2]
-
 		if 0 in winsum:
 			return 'X wins'
 		if 3 in winsum:
@@ -51,6 +56,13 @@ class TttLayout(BoxLayout):
 			self.ids.win.text = self.win();
 		else:
 			self.ids.win.text = 'Tic-tac-toe'
+	
+	def refresh(self):
+		self.tictactoe = [inf for i in range(9)]
+		self.tic = 1
+		self.ids.win.text = 'Tic-tac-toe'
+		for i in range(9):
+			self.ids[f'bt{i}'].text = ''
 
 class TttApp(App):
 	def build(self):

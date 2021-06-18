@@ -1,5 +1,3 @@
-#:import math math
-
 <CustButton@Button>:
 	border: (10, 10, 10, 10)
 	text: ''
@@ -11,47 +9,40 @@
 			rgba: (1,1,1,1)
 		Rectangle:
 			size: self.size
-			#source: '' Insert image file 
-	#Label:
-	#	markup: True
-	#	id: title
-	#	size_hint_y: 0.3
-	#	text: '[color=008080]TicTacToe[/color]'
-	#	font_size: '70sp'
 	GridLayout:
 		cols: 3
 		CustButton:
 			id: bt0
-			on_press: if root.tictactoe[0] == math.inf and root.win() == False : root.symbolCell(); self.text = root.symbol; root.tictactoe[0] = root.tic; root.selectCell(); root.win_display();
+			on_press: root.click(0)
 		CustButton:
 			id: bt1
-			on_press: if root.tictactoe[1] == math.inf and root.win() == False : root.symbolCell(); self.text = root.symbol; root.tictactoe[1] = root.tic; root.selectCell(); root.win_display();
+			on_press: root.click(1)
 		CustButton:
 			id: bt2
-			on_press: if root.tictactoe[2] == math.inf and root.win() == False : root.symbolCell(); self.text = root.symbol; root.tictactoe[2] = root.tic; root.selectCell(); root.win_display();
+			on_press: root.click(2)
 		CustButton:
 			id: bt3
-			on_press: if root.tictactoe[3] == math.inf and root.win() == False: root.symbolCell(); self.text = root.symbol; root.tictactoe[3] = root.tic; root.selectCell(); root.win_display();
+			on_press: root.click(3)
 		CustButton:
 			id: bt4
-			on_press: if root.tictactoe[4] == math.inf and root.win() == False : root.symbolCell(); self.text = root.symbol; root.tictactoe[4] = root.tic; root.selectCell(); root.win_display();
+			on_press: root.click(4)
 		CustButton:
 			id: bt5
-			on_press: if root.tictactoe[5] == math.inf and root.win() == False : root.symbolCell(); self.text = root.symbol; root.tictactoe[5] = root.tic; root.selectCell(); root.win_display();
+			on_press: root.click(5)
 		CustButton:
 			id: bt6
-			on_press: if root.tictactoe[6] == math.inf and root.win() == False: root.symbolCell(); self.text = root.symbol; root.tictactoe[6] = root.tic; root.selectCell(); root.win_display();
+			on_press: root.click(6)
 		CustButton:
 			id: bt7
-			on_press: if root.tictactoe[7] == math.inf and root.win() == False: root.symbolCell(); self.text = root.symbol; root.tictactoe[7] = root.tic; root.selectCell(); root.win_display();
+			on_press: root.click(7)
 		CustButton:
 			id: bt8
-			on_press: if root.tictactoe[8] == math.inf and root.win() == False: root.symbolCell(); self.text = root.symbol; root.tictactoe[8] = root.tic; root.selectCell(); root.win_display();
+			on_press: root.click(8)
 	Button:
 		id: win
 		size_hint_y: 0.3
 		text: 'Tic-tac-toe'
 		font_size: '50sp'
-		#on_press:
+		on_press: if root.win() : root.refresh()
 			
 
