@@ -38,11 +38,21 @@
 		CustButton:
 			id: bt8
 			on_press: root.click(8)
-	Button:
-		id: win
-		size_hint_y: 0.3
-		text: 'Tic-tac-toe'
-		font_size: '50sp'
-		on_press: if root.win() : root.refresh()
-			
-
+	GridLayout:
+		cols: 3
+		size_hint_y: 0.2
+		Label:
+			markup: True
+			id: so
+			text: f'[color=008080]O: {root.score_O}[/color]'
+			font_size: '30sp'
+		Button:
+			id: win
+			text: 'O starts'
+			font_size: '30sp'
+			on_press: if root.win() : root.refresh()
+		Label:
+			markup: True
+			id: sx
+			text: f'[color=008080]X: {root.score_X}[/color]'
+			font_size: '30sp'

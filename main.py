@@ -9,8 +9,11 @@ from kivy.properties import NumericProperty, StringProperty, ObjectProperty
 Builder.load_file('TttApp.kv')
 
 class TttLayout(BoxLayout):
+	count = 1
 	tic = NumericProperty(1)
 	symbol = StringProperty('')
+	score_O = NumericProperty(0)
+	score_X = NumericProperty(0)
 	tictactoe = ObjectProperty([inf for i in range(9)])
 
 	def click(self, bt):
@@ -52,15 +55,30 @@ class TttLayout(BoxLayout):
 		return False
 		
 	def win_display(self):
-		if self.win():
-			self.ids.win.text = self.win();
+		win = self.win()
+		if win:
+			self.ids.win.text = win;
+			if win[0] == 'O':
+				self.score_O += 1
+			elif win[0] == 'X':
+				self.score_X += 1
+			self.ids.so.text = f'[color=008080]O: {self.score_O}[/color]'
+			self.ids.sx.text = f'[color=008080]X: {self.score_X}[/color]'
 		else:
-			self.ids.win.text = 'Tic-tac-toe'
+			if self.tic == 1:
+				self.ids.win.text = 'O to play'
+			else:
+				self.ids.win.text = 'X to play'
 	
 	def refresh(self):
 		self.tictactoe = [inf for i in range(9)]
-		self.tic = 1
-		self.ids.win.text = 'Tic-tac-toe'
+		self.count += 1
+		if self.count % 2:
+			self.tic = 1
+			self.ids.win.text = 'O starts'
+		else:
+			self.tic = 0 
+			self.ids.win.text = 'X starts'
 		for i in range(9):
 			self.ids[f'bt{i}'].text = ''
 
